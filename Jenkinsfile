@@ -10,21 +10,21 @@ pipeline {
     stages{
     	stage('environment'){
     	    steps{
-    	        sh 'java -version'
-    	        sh 'mvn -v'
+    	        sh '/opt/java/openjdk/bin/java -version'
+//     	        sh 'mvn -v'
     	        sh 'docker version'
     	    }
     	}
-        stage('Build'){
-            steps {
-            	sh 'mvn clean compile install -Djasypt.encryptor.password=secret'
-            }
-        }
-        stage('Test'){
-            steps {
-            	sh 'mvn test -Djasypt.encryptor.password=secret'
-            }
-        }
+//         stage('Build'){
+//             steps {
+//             	sh 'mvn clean compile install -Djasypt.encryptor.password=secret'
+//             }
+//         }
+//         stage('Test'){
+//             steps {
+//             	sh 'mvn test -Djasypt.encryptor.password=secret'
+//             }
+//         }
 		
 // 		stage('Deploy'){
 //             steps {
