@@ -12,7 +12,7 @@ pipeline {
     	    steps{
     	        sh 'java -version'
     	        sh 'mvn -v'
-    	        sh 'docker version'
+//     	        sh 'docker version'
     	    }
     	}
         stage('Build'){
