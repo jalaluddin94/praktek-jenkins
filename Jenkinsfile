@@ -17,34 +17,26 @@ pipeline {
     	}
         stage('Build'){
             steps {
-            	withCredentials([
-            		string(credentialsId:'jasypt_secret', variable:'secret')
-            	]){
-                	bat 'mvn clean compile install -Djasypt.encryptor.password=${secret}'
-            	}
+            	bat 'mvn clean compile install -Djasypt.encryptor.password=secret'
             }
         }
         stage('Test'){
             steps {
-            	withCredentials([
-            		string(credentialsId:'jasypt_secret', variable:'secret')
-            	]){
-                	bat 'mvn test -Djasypt.encryptor.password=${secret}'
-            	}
+            	bat 'mvn test -Djasypt.encryptor.password=secret'
             }
         }
 		
-		stage('Deploy'){
-            steps {
-				withCredentials([
-            		usernamePassword(credentialsId:'docker', usernameVariable:'username', passwordVariable:'password')
-            	]){
-					bat 'mvn jib:dockerBuild'
-					bat 'docker tag ${LOCAL_IMAGE} ${REPO_IMAGE}'
-					bat 'docker push ${REPO_IMAGE}'
-					bat 'docker rmi ${REPO_IMAGE}'
-				}
-            }
-        }
+// 		stage('Deploy'){
+//             steps {
+// 				withCredentials([
+//             		usernamePassword(credentialsId:'docker', usernameVariable:'username', passwordVariable:'password')
+//             	]){
+// 					bat 'mvn jib:dockerBuild'
+// 					bat 'docker tag ${LOCAL_IMAGE} ${REPO_IMAGE}'
+// 					bat 'docker push ${REPO_IMAGE}'
+// 					bat 'docker rmi ${REPO_IMAGE}'
+// 				}
+//             }
+//         }
     }
 }
