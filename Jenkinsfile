@@ -10,9 +10,9 @@ pipeline {
     stages{
     	stage('environment'){
     	    steps{
-    	        sh '/opt/java/openjdk/bin/java -version'
-//     	        sh 'mvn -v'
-    	        sh 'docker version'
+    	        sh 'java -version'
+    	        sh 'mvn -v'
+//     	        sh 'docker version'
     	    }
     	}
 //         stage('Build'){
