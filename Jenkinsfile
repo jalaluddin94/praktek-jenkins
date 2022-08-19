@@ -1,5 +1,5 @@
 pipeline {
-    agent windows
+    agent any
     tools{
         maven 'maven_3.8.6'
     }
@@ -10,19 +10,19 @@ pipeline {
     stages{
     	stage('environment'){
     	    steps{
-    	        bat 'java -version'
-    	        bat 'mvn -v'
-    	        bat 'docker version'
+    	        sh 'java -version'
+    	        sh 'mvn -v'
+    	        sh 'docker version'
     	    }
     	}
         stage('Build'){
             steps {
-            	bat 'mvn clean compile install -Djasypt.encryptor.password=secret'
+            	sh 'mvn clean compile install -Djasypt.encryptor.password=secret'
             }
         }
         stage('Test'){
             steps {
-            	bat 'mvn test -Djasypt.encryptor.password=secret'
+            	sh 'mvn test -Djasypt.encryptor.password=secret'
             }
         }
 		
